@@ -37,12 +37,17 @@ const router = createRouter({
         {
           path: 'myTransition',
           name: 'myTransition',
-          component: () => import('../views/Transitions/myTransition.vue')
+          component: () => import('../views/TransGroup/myTransition.vue')
         },
         {
           path: 'secTransition',
           name: 'secTransition',
-          component: () => import('../views/Transitions/secTransition.vue')
+          component: () => import('../views/TransGroup/secTransition.vue')
+        },
+        {
+          path: 'tabsAnimated',
+          name: 'tabsAnimated',
+          component: () => import('../views/TransGroup/tabsAnimated.vue')
         }
       ]
     }
