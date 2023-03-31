@@ -28,6 +28,23 @@ const router = createRouter({
           component: () => import('../views/Rocket/myRocket.vue')
         }
       ]
+    },
+    {
+      path: '/transition',
+      name: 'transition',
+      redirect: '/transition/myTransition',
+      children: [
+        {
+          path: 'myTransition',
+          name: 'myTransition',
+          component: () => import('../views/Transitions/myTransition.vue')
+        },
+        {
+          path: 'secTransition',
+          name: 'secTransition',
+          component: () => import('../views/Transitions/secTransition.vue')
+        }
+      ]
     }
   ]
 })
