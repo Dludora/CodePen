@@ -8,9 +8,13 @@
         <div class="menu__line" :class="className"></div>
       </div>
       <div class="contents">
-        <transition>
+        <transition name="content" mode="out-in">
           <div class="contents__content" v-if="active === 0" key="0">
-            <span class="material-icons">build</span>
+            <span>
+              <i>
+                <Build/>
+              </i>
+            </span>
             <h2>First Section</h2>
             <p>Quasi dignissimos eos ea hic impedit ipsum, aliquam nihil laborum ad, esse consequatur, delectus
               minus!</p>
@@ -18,7 +22,9 @@
           </div>
 
           <div class="contents__content" v-else-if="active === 1" key="1">
-            <span class="material-icons">flash_on</span>
+            <span><i>
+              <Flash/>
+            </i></span>
             <h2>Second Section</h2>
             <p>Molestiae dolore itaque at dolor, odio blanditiis sequi, tempore illum doloremque repellat dolores
               deserunt debitis, rem eaque! Magnam placeat esse vero quisquam!</p>
@@ -26,7 +32,9 @@
           </div>
 
           <div class="contents__content" v-else-if="active === 2" key="2">
-            <span class="material-icons">lock</span>
+            <span><i>
+              <LockClosed/>
+            </i></span>
             <h2>Thirst Section</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, cum maxime reprehenderit quisquam
               ratione eaque veritatis perspiciatis totam.</p>
@@ -40,6 +48,7 @@
 
 <script setup lang="ts">
 import {computed, ref} from 'vue'
+import {Build, Flash, LockClosed} from '@vicons/ionicons5'
 
 const active = ref<number>(0)
 const className = computed(() => {
@@ -78,11 +87,11 @@ $greyDark: #5a6181;
     display: flex;
     flex-direction: column;
 
-
     .menu {
       display: flex;
       justify-content: space-between;
       width: 28rem;
+      margin: 0 auto;
       position: relative;
 
       .is-active {
@@ -158,12 +167,113 @@ $greyDark: #5a6181;
     }
 
   }
+
+  .contents {
+    height: 20rem;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 5rem;
+
+        i {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 4rem;
+          width: 4rem;
+          background-color: $primary-light;
+          border-radius: 10%;
+
+          svg {
+            color: $primary;
+            height: 3rem;
+            width: 3rem;
+          }
+
+        }
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        color: $greyDark;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin: 1.6rem 0;
+      }
+
+      button {
+        outline: none;
+        border: none;
+        color: $primary;
+        background: none;
+        cursor: pointer;
+        font-size: 1.4rem;
+        font-family: inherit;
+        font-weight: 500;
+
+        &:hover {
+          border-bottom: 1px solid $primary;
+        }
+      }
+    }
+  }
+
 }
 
+.content-enter-from, .content-leave-to {
+  opacity: 0;
+}
+
+.content-enter-active, .content-leave-active {
+  transition: opacity .4s ease;
+}
+
+.content-enter-active {
+  animation: slide-in .4s ease-in-out ;
+}
+
+.content-leave-active {
+  animation: slide-out .4s ease-in-out ;
+}
+@keyframes slide-in {
+  0% {
+    transform: translateY(-2rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes slide-out {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(2rem);
+  }
+}
 </style>
 
 <style>
 #app, body, html {
+  overflow: hidden;
   width: 100%;
   height: 100%;
 }
